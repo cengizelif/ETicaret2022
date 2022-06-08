@@ -18,6 +18,22 @@ namespace ETicaret2022.Controllers
             return View();
         }
 
+        public ActionResult Kategori(int id)
+        {
+            Kategori kat=db.Kategori.Find(id);
+
+            ViewBag.KategoriAd = kat.KategoriAdi;
+
+            ViewBag.Kategoriler = db.Kategori.ToList();
+
+            return View(db.Urunler.Where(x=>x.KategoriID==id).OrderBy(x=>x.UrunAdi).ToList());
+        }
+        public ActionResult Urun(int id)
+        {
+            ViewBag.Kategoriler = db.Kategori.ToList();
+            return View(db.Urunler.Find(id));
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
