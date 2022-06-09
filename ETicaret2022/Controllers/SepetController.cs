@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 
 namespace ETicaret2022.Controllers
 {
+    [Authorize]
     public class SepetController : Controller
     {
 

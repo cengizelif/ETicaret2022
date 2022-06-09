@@ -16,9 +16,9 @@ namespace ETicaret2022.Controllers
             return View(db.Siparis.ToList());
         }
 
-        public ActionResult SiparisDetay(int SiparisID)
+        public ActionResult SiparisDetay(int id)
         {
-            var siparisdetay = db.SiparisDetay.Where(x => x.SiparisID == SiparisID).ToList();
+            var siparisdetay = db.SiparisDetay.Where(x => x.SiparisID == id).ToList();
 
             return View(siparisdetay);
         }
@@ -46,9 +46,9 @@ namespace ETicaret2022.Controllers
 
             string sipId = string.Format("{0:yyyyMMddHHmmss}", DateTime.Now);
            
-            string onayURL = "https://localhost:44376/Siparis/Tamamlandi";
+            string onayURL = "https://localhost:44329/Siparis/Tamamlandi";
 
-            string hataURL = "https://localhost:44376/Siparis/Hatali";
+            string hataURL = "https://localhost:44329/Siparis/Hatali";
 
             string RDN = "asdf";
             string StoreKey = "123456";
@@ -82,6 +82,48 @@ namespace ETicaret2022.Controllers
 
 
 
+            return View();
+        }
+
+        public ActionResult Tamamlandi()
+        {
+            string userID = User.Identity.GetUserId();
+
+            Siparis siparis = new Siparis()
+            {
+                Ad = Request.Form.Get("Ad"),
+                Soyad=Request.Form.Get("Soyad"),
+                Adres= Request.Form.Get("Adres"),
+                Tarih=DateTime.Now,
+                 TCKimlikNo= Request.Form.Get("TCKimlikNo"),
+                Telefon=Request.Form.Get("Telefon"),
+                 UserID=userID
+            };
+
+            List<Sepet> sepettekiurunler = db.Sepet.Where(x => x.UserID == userID).ToList();
+
+            foreach (var item in sepettekiurunler)
+            {
+                SiparisDetay sd = new SiparisDetay()
+                {
+                    Adet = item.Adet,
+                    ToplamTutar = item.ToplamTutar,
+                    UrunID = item.UrunID
+                };
+
+                siparis.SiparisDetay.Add(sd);
+                db.Sepet.Remove(item);
+            }
+
+            db.Siparis.Add(siparis);
+            db.SaveChanges();
+
+            return View();
+        }
+
+        public ActionResult Hatali()
+        {
+            ViewBag.hata = Request.Form;
             return View();
         }
     }
