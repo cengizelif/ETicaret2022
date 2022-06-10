@@ -11,6 +11,7 @@ using ETicaret2022.Models;
 
 namespace ETicaret2022.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UrunlerController : Controller
     {
         private ETicaret2022Entities db = new ETicaret2022Entities();

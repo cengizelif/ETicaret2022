@@ -8,12 +8,15 @@ using Microsoft.AspNet.Identity;
 
 namespace ETicaret2022.Controllers
 {
+    [Authorize]
     public class SiparisController : Controller
     {
         ETicaret2022Entities db = new ETicaret2022Entities();
         public ActionResult Index()
-        {                       
-            return View(db.Siparis.ToList());
+        {
+            string userID = User.Identity.GetUserId();
+          
+            return View(db.Siparis.Where(x => x.UserID == userID).ToList());
         }
 
         public ActionResult SiparisDetay(int id)
@@ -79,8 +82,6 @@ namespace ETicaret2022.Controllers
             ViewBag.EMail = "cenelif@gmail.com";
             ViewBag.UserID = "ElifCengiz"; // bu id yi bankanın sanala pos ekranında biz oluşturuyoruz.
             ViewBag.PostURL = "https://entegrasyon.asseco-see.com.tr/fim/est3Dgate";
-
-
 
             return View();
         }

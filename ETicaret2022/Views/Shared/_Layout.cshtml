@@ -6,7 +6,9 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    @{ 
+        bool admin = User.IsInRole("Admin");
+    }
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,10 +24,20 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("AnaSayfa", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Kategoriler", "Index", "Kategori")</li>
-                    <li>@Html.ActionLink("Ürünler", "Index", "Urunler")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (admin)
+                    {
+                        <li>@Html.ActionLink("Kategoriler", "Index", "Kategori")</li>
+                        <li>@Html.ActionLink("Ürünler", "Index", "Urunler")</li>
+                    }
+
+                    @if (Request.IsAuthenticated)
+                    {            
+                        <li>@Html.ActionLink("Siparişlerim", "Index", "Siparis")</li>
+                    <li>@Html.ActionLink("Sepetim", "Index", "Sepet")</li>
+                    }
+
+                    <li>@Html.ActionLink("Hakkında", "About", "Home")</li>
+                    <li>@Html.ActionLink("İletişim", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
