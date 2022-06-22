@@ -92,11 +92,11 @@ namespace ETicaret2022.Controllers
 
             Siparis siparis = new Siparis()
             {
-                Ad = Request.Form.Get("Ad"),
+                Ad=Request.Form.Get("Ad"),
                 Soyad=Request.Form.Get("Soyad"),
-                Adres= Request.Form.Get("Adres"),
+                Adres=Request.Form.Get("Adres"),
                 Tarih=DateTime.Now,
-                 TCKimlikNo= Request.Form.Get("TCKimlikNo"),
+                TCKimlikNo=Request.Form.Get("TCKimlikNo"),
                 Telefon=Request.Form.Get("Telefon"),
                  UserID=userID
             };

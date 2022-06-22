@@ -13,6 +13,7 @@ namespace ETicaret2022.Controllers
 {
     public class HomeController : Controller
     {
+        //async Task<ActionResult>
         ETicaret2022Entities db = new ETicaret2022Entities();
         public async Task<ActionResult> Index()
         {
@@ -25,7 +26,7 @@ namespace ETicaret2022.Controllers
 
             ViewBag.Kategoriler = JsonConvert.DeserializeObject<List<Kategori>>(sonuc);
 
-            //ViewBag.Kategoriler = db.Kategori.ToList();
+           // ViewBag.Kategoriler = db.Kategori.ToList();
             ViewBag.Urunler = db.Urunler.OrderByDescending(x => x.UrunID).Take(10).ToList();
 
             return View();

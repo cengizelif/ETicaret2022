@@ -184,54 +184,54 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRoles.cs">
-      <DependentUpon>DatabaseContext.tt</DependentUpon>
+      <DependentUpon>ETicaret2022.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserClaims.cs">
-      <DependentUpon>DatabaseContext.tt</DependentUpon>
+      <DependentUpon>ETicaret2022.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserLogins.cs">
-      <DependentUpon>DatabaseContext.tt</DependentUpon>
+      <DependentUpon>ETicaret2022.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUsers.cs">
-      <DependentUpon>DatabaseContext.tt</DependentUpon>
+      <DependentUpon>ETicaret2022.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>DatabaseContext.tt</DependentUpon>
+      <DependentUpon>ETicaret2022.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DatabaseContext.Context.cs">
+    <Compile Include="Models\ETicaret2022.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DatabaseContext.Context.tt</DependentUpon>
+      <DependentUpon>ETicaret2022.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DatabaseContext.cs">
+    <Compile Include="Models\ETicaret2022.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DatabaseContext.tt</DependentUpon>
+      <DependentUpon>ETicaret2022.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DatabaseContext.Designer.cs">
+    <Compile Include="Models\ETicaret2022.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DatabaseContext.edmx</DependentUpon>
+      <DependentUpon>ETicaret2022.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kategori.cs">
-      <DependentUpon>DatabaseContext.tt</DependentUpon>
+      <DependentUpon>ETicaret2022.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Sepet.cs">
-      <DependentUpon>DatabaseContext.tt</DependentUpon>
+      <DependentUpon>ETicaret2022.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Siparis.cs">
-      <DependentUpon>DatabaseContext.tt</DependentUpon>
+      <DependentUpon>ETicaret2022.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SiparisDetay.cs">
-      <DependentUpon>DatabaseContext.tt</DependentUpon>
+      <DependentUpon>ETicaret2022.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>DatabaseContext.tt</DependentUpon>
+      <DependentUpon>ETicaret2022.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Urunler.cs">
-      <DependentUpon>DatabaseContext.tt</DependentUpon>
+      <DependentUpon>ETicaret2022.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -245,26 +245,26 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\DatabaseContext.Context.tt">
+    <Content Include="Models\ETicaret2022.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DatabaseContext.edmx</DependentUpon>
-      <LastGenOutput>DatabaseContext.Context.cs</LastGenOutput>
+      <DependentUpon>ETicaret2022.edmx</DependentUpon>
+      <LastGenOutput>ETicaret2022.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DatabaseContext.tt">
+    <Content Include="Models\ETicaret2022.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DatabaseContext.edmx</DependentUpon>
-      <LastGenOutput>DatabaseContext.cs</LastGenOutput>
+      <DependentUpon>ETicaret2022.edmx</DependentUpon>
+      <LastGenOutput>ETicaret2022.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\DatabaseContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DatabaseContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DatabaseContext.edmx.diagram">
-      <DependentUpon>DatabaseContext.edmx</DependentUpon>
-    </Content>
     <Content Include="libman.json" />
+    <EntityDeploy Include="Models\ETicaret2022.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ETicaret2022.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ETicaret2022.edmx.diagram">
+      <DependentUpon>ETicaret2022.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

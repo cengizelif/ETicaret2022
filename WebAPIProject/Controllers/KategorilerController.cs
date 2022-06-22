@@ -10,9 +10,9 @@ namespace WebAPIProject.Controllers
 {
     public class KategorilerController : ApiController
     {
+        ETicaret2022Entities db = new ETicaret2022Entities();
         public List<Kategorim> Get()
-        {
-            ETicaret2022Entities db = new ETicaret2022Entities();
+        {           
 
             //List<Kategori> kategoriler = (from x in db.Kategori
             //                              select new Kategori { KategoriID = x.KategoriID, KategoriAdi = x.KategoriAdi }).ToList();
@@ -27,6 +27,13 @@ namespace WebAPIProject.Controllers
             }
 
             return liste;
+        }
+    
+        public IHttpActionResult Post(Kategori kategori)
+        {
+            db.Kategori.Add(kategori);
+            db.SaveChanges();
+            return Ok();
         }
     }
 }

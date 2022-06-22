@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using ETicaret2022.Models;
@@ -18,7 +19,24 @@ namespace ETicaret2022.Controllers
         // GET: Kategori
         public ActionResult Index()
         {
-            return View(db.Kategori.ToList());
+            List<Kategori> kategoriler = null;
+
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44390/api/Kategoriler");
+
+            var response = client.GetAsync("Kategoriler");
+            response.Wait();
+
+
+            var getresult = response.Result;
+            if(getresult.IsSuccessStatusCode)
+            {
+                var data = getresult.Content.ReadAsAsync<List<Kategori>>();
+                data.Wait();
+                kategoriler = data.Result;
+            }
+
+            return View(kategoriler);
         }
 
         // GET: Kategori/Details/5
@@ -47,11 +65,19 @@ namespace ETicaret2022.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "KategoriID,KategoriAdi")] Kategori kategori)
         {
+         
+
             if (ModelState.IsValid)
             {
-                db.Kategori.Add(kategori);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("https://localhost:44390/api/Kategoriler");
+
+                var result = client.PostAsJsonAsync<Kategori>("Kategoriler", kategori);
+                result.Wait();
+
+                var postResult = result.Result;
+                if(postResult.IsSuccessStatusCode)
+                  return RedirectToAction("Index");
             }
 
             return View(kategori);

@@ -18,10 +18,10 @@ namespace ETicaret2022.Controllers
         {
             Urunler urun = db.Urunler.Find(id);
 
-            Sepet sepettekiurun = db.Sepet.FirstOrDefault(x => x.UrunID == id);
-
-
             string userID = User.Identity.GetUserId();
+
+            Sepet sepettekiurun = db.Sepet.FirstOrDefault(x => x.UrunID == id && x.UserID == userID);
+            
 
             if(sepettekiurun==null)
             {
