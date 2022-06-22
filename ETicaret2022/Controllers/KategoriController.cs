@@ -15,18 +15,16 @@ namespace ETicaret2022.Controllers
     public class KategoriController : Controller
     {
         private ETicaret2022Entities db = new ETicaret2022Entities();
-
-        // GET: Kategori
+        HttpClient client = new HttpClient();
+  
         public ActionResult Index()
         {
             List<Kategori> kategoriler = null;
-
-            var client = new HttpClient();
+           
             client.BaseAddress = new Uri("https://localhost:44390/api/");
 
             var response = client.GetAsync("Kategoriler");
             response.Wait();
-
 
             var getresult = response.Result;
             if(getresult.IsSuccessStatusCode)
@@ -49,7 +47,7 @@ namespace ETicaret2022.Controllers
 
             Kategori kategori = null;
 
-            var client = new HttpClient();
+       
             client.BaseAddress = new Uri("https://localhost:44390/api/");
 
             var response = client.GetAsync("Kategoriler/"+id.ToString());
@@ -81,11 +79,11 @@ namespace ETicaret2022.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "KategoriID,KategoriAdi")] Kategori kategori)
-        {         
+        {       
 
             if (ModelState.IsValid)
             {
-                var client = new HttpClient();
+             
                 client.BaseAddress = new Uri("https://localhost:44390/api/Kategoriler");
 
                 var result = client.PostAsJsonAsync<Kategori>("Kategoriler", kategori);
@@ -110,7 +108,7 @@ namespace ETicaret2022.Controllers
 
             Kategori kategori = null;
 
-            var client = new HttpClient();
+           
             client.BaseAddress = new Uri("https://localhost:44390/api/");
 
             var response = client.GetAsync("Kategoriler/" + id.ToString());
@@ -142,7 +140,7 @@ namespace ETicaret2022.Controllers
                 //db.Entry(kategori).State = EntityState.Modified;
                 //db.SaveChanges();
 
-                var client = new HttpClient();
+             
                 client.BaseAddress = new Uri("https://localhost:44390/api/");
 
                 var response = client.PutAsJsonAsync<Kategori>("Kategoriler",kategori);
@@ -170,7 +168,7 @@ namespace ETicaret2022.Controllers
 
             Kategori kategori = null;
 
-            var client = new HttpClient();
+      
             client.BaseAddress = new Uri("https://localhost:44390/api/");
 
             var response = client.GetAsync("Kategoriler/" + id.ToString());
@@ -200,10 +198,10 @@ namespace ETicaret2022.Controllers
             //db.Kategori.Remove(kategori);
             //db.SaveChanges();
 
-            var client = new HttpClient();
+       
             client.BaseAddress = new Uri("https://localhost:44390/api/");
 
-            var response = client.DeleteAsync("Kategoriler/" + id.ToString());
+            var response = client.DeleteAsync("Kategoriler/" + id);
 
 
             var getresult = response.Result;
