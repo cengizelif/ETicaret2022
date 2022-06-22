@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -28,10 +29,32 @@ namespace WebAPIProject.Controllers
 
             return liste;
         }
+
+        public IHttpActionResult Get(int id)
+        {
+            Kategori kategori = db.Kategori.Find(id);
+            Kategorim kategorim = new Kategorim() { KategoriAdi = kategori.KategoriAdi, KategoriID = kategori.KategoriID };
+            return Ok(kategorim);
+        }
     
         public IHttpActionResult Post(Kategori kategori)
         {
             db.Kategori.Add(kategori);
+            db.SaveChanges();
+            return Ok();
+        }
+
+        public IHttpActionResult Put(Kategori kategori)
+        {
+            db.Entry(kategori).State = EntityState.Modified;
+            db.SaveChanges();
+            return Ok();
+        }
+
+        public IHttpActionResult Delete(int id)
+        {
+            Kategori kategori = db.Kategori.Find(id);
+            db.Kategori.Remove(kategori);
             db.SaveChanges();
             return Ok();
         }

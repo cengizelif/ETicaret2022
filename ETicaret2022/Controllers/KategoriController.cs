@@ -22,7 +22,7 @@ namespace ETicaret2022.Controllers
             List<Kategori> kategoriler = null;
 
             var client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44390/api/Kategoriler");
+            client.BaseAddress = new Uri("https://localhost:44390/api/");
 
             var response = client.GetAsync("Kategoriler");
             response.Wait();
@@ -46,7 +46,24 @@ namespace ETicaret2022.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Kategori kategori = db.Kategori.Find(id);
+
+            Kategori kategori = null;
+
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44390/api/");
+
+            var response = client.GetAsync("Kategoriler/"+id.ToString());
+            response.Wait();
+
+            var getresult = response.Result;
+            if (getresult.IsSuccessStatusCode)
+            {
+                var data = getresult.Content.ReadAsAsync<Kategori>();
+                data.Wait();
+                kategori = data.Result;
+            }
+
+            //Kategori kategori = db.Kategori.Find(id);
             if (kategori == null)
             {
                 return HttpNotFound();
@@ -64,8 +81,7 @@ namespace ETicaret2022.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "KategoriID,KategoriAdi")] Kategori kategori)
-        {
-         
+        {         
 
             if (ModelState.IsValid)
             {
@@ -90,7 +106,25 @@ namespace ETicaret2022.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Kategori kategori = db.Kategori.Find(id);
+            //   Kategori kategori = db.Kategori.Find(id);
+
+            Kategori kategori = null;
+
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44390/api/");
+
+            var response = client.GetAsync("Kategoriler/" + id.ToString());
+            response.Wait();
+
+            var getresult = response.Result;
+            if (getresult.IsSuccessStatusCode)
+            {
+                var data = getresult.Content.ReadAsAsync<Kategori>();
+                data.Wait();
+                kategori = data.Result;
+            }
+
+
             if (kategori == null)
             {
                 return HttpNotFound();
@@ -105,9 +139,22 @@ namespace ETicaret2022.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(kategori).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //db.Entry(kategori).State = EntityState.Modified;
+                //db.SaveChanges();
+
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("https://localhost:44390/api/");
+
+                var response = client.PutAsJsonAsync<Kategori>("Kategoriler",kategori);
+                response.Wait();
+
+                var putresult = response.Result;
+                if (putresult.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                
             }
             return View(kategori);
         }
@@ -119,7 +166,24 @@ namespace ETicaret2022.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Kategori kategori = db.Kategori.Find(id);
+            //Kategori kategori = db.Kategori.Find(id);
+
+            Kategori kategori = null;
+
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44390/api/");
+
+            var response = client.GetAsync("Kategoriler/" + id.ToString());
+            response.Wait();
+
+            var getresult = response.Result;
+            if (getresult.IsSuccessStatusCode)
+            {
+                var data = getresult.Content.ReadAsAsync<Kategori>();
+                data.Wait();
+                kategori = data.Result;
+            }
+
             if (kategori == null)
             {
                 return HttpNotFound();
@@ -132,9 +196,23 @@ namespace ETicaret2022.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Kategori kategori = db.Kategori.Find(id);
-            db.Kategori.Remove(kategori);
-            db.SaveChanges();
+            //Kategori kategori = db.Kategori.Find(id);
+            //db.Kategori.Remove(kategori);
+            //db.SaveChanges();
+
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44390/api/");
+
+            var response = client.DeleteAsync("Kategoriler/" + id.ToString());
+
+
+            var getresult = response.Result;
+            if (getresult.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+
+
             return RedirectToAction("Index");
         }
 
